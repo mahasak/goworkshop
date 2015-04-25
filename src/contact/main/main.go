@@ -3,6 +3,10 @@ package main
 import (
 	"contact"
 	"fmt"
+	"log"
+	"net/http"
+
+	"github.com/ant0ine/go-json-rest/rest"
 )
 
 func main() {
@@ -18,10 +22,19 @@ func main() {
 			Content: "this is a message",
 		}
 	*/
-	form, err := contact.NewForm("Pondd", "NoobMe", "This is a message")
-	// #fistname *lastname $content
-	if err != nil {
+
+	/*
+		form, err := contact.NewForm("x", "x", "This is a message")
+		// #fistname *lastname $content
+		if err != nil {
+			fmt.Println(err.Error())
+		}
 		fmt.Println(form)
-	}
-	fmt.Println(form)
+	*/
+	api := rest.NewApi()
+	api.Use(rest.DefaultDevStack...)
+	api.SetApp(rest.AppSimple(func(w rest.ResponseWriter, r *rest.Request) {
+		w.WriteJson(map[string]string{"Body": "Hello World!"})
+	}))
+	log.Fatal(http.ListenAndServe(":8080", api.MakeHandler()))
 }
