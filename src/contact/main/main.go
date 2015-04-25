@@ -31,10 +31,26 @@ func main() {
 		}
 		fmt.Println(form)
 	*/
+
+	var arr [5]int
+	arr[0] = 10
+	arr[0] = 5
+	fmt.Println(arr)
 	api := rest.NewApi()
 	api.Use(rest.DefaultDevStack...)
-	api.SetApp(rest.AppSimple(func(w rest.ResponseWriter, r *rest.Request) {
-		w.WriteJson(map[string]string{"Body": "Hello World!"})
-	}))
+	router, _ := rest.MakeRouter(
+		rest.Get("/form", func(w rest.ResponseWriter, r *rest.Request) {
+			w.WriteJson([]*contact.Form{
+				&contact.Form{
+					Sender: contact.Sender{
+						Firstname: "Pondd",
+						Lastname:  "NoobMe",
+					},
+					Content: "Contentt",
+				},
+			})
+		}),
+	)
+	api.SetApp(router)
 	log.Fatal(http.ListenAndServe(":8080", api.MakeHandler()))
 }
