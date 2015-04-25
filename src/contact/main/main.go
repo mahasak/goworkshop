@@ -18,6 +18,10 @@ func main() {
 			Content: "this is a message",
 		}
 	*/
-	form := contact.NewForm("Pondd", "NoobMe", "This is a message")
+	form, err := contact.NewForm("Pondd", "NoobMe", "This is a message")
+	// #fistname *lastname $content
+	if err != nil {
+		fmt.Println(form)
+	}
 	fmt.Println(form)
 }
