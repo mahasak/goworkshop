@@ -1,6 +1,3 @@
-# goworkshop
-=====================================================================
-
 # GoLang Setup Guide
 - go to https://golang.org/dl/
 - download 64 bit o1.4.2.darwin-amd64-osx10.8.pkg or later
