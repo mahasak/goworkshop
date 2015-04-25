@@ -63,3 +63,8 @@ func NewForm(firstname, lastname, msg string) (*Form, error) {
 func ListAll() []*Form {
 	return forms
 }
+
+//Get return an object
+func Get(id int) *Form {
+	return forms[id]
+}

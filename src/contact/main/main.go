@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/ant0ine/go-json-rest/rest"
 )
@@ -12,25 +13,6 @@ import (
 func main() {
 	msg := contact.Say()
 	fmt.Println(msg)
-
-	/*
-		contact := contact.Form{
-			Sender: contact.Sender{
-				Firstname: "Pondd",
-				Lastname:  "NoobMe",
-			},
-			Content: "this is a message",
-		}
-	*/
-
-	/*
-		form, err := contact.NewForm("x", "x", "This is a message")
-		// #fistname *lastname $content
-		if err != nil {
-			fmt.Println(err.Error())
-		}
-		fmt.Println(form)
-	*/
 
 	var arr [5]int
 	arr[0] = 10
@@ -49,14 +31,15 @@ func main() {
 }
 
 func listForms(w rest.ResponseWriter, r *rest.Request) {
-	w.WriteJson(contact.ListAll())
+	w.WriteJson(contact.ListAllMongo())
+}
+
+func getForms(w rest.ResponseWriter, r *rest.Request) {
+	id, _ := strconv.Atoi(r.PathParam("id"))
+	w.WriteJson(contact.Get(id))
 }
 
 /*
-func getForms(w rest.ResponseWriter, r *rest.Request) {
-	id, _ := strconv.Atoi(r.PathParam("id"))
-	w.WriteJson(forms[id])
-}
 func createForms(w rest.ResponseWriter, r *rest.Request) {
 	var form contact.Form
 	r.DecodeJsonPayload(&form)
