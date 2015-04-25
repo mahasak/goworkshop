@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/ant0ine/go-json-rest/rest"
 )
@@ -38,17 +39,34 @@ func main() {
 	fmt.Println(arr)
 	api := rest.NewApi()
 	api.Use(rest.DefaultDevStack...)
+	forms := []*contact.Form{
+		&contact.Form{
+			Sender: contact.Sender{
+				Firstname: "Pondd1",
+				Lastname:  "NoobMe",
+			},
+			Content: "Contentt",
+		},
+		&contact.Form{
+			Sender: contact.Sender{
+				Firstname: "Pondd2",
+				Lastname:  "NoobMe",
+			},
+			Content: "Contentt",
+		},
+	}
 	router, _ := rest.MakeRouter(
 		rest.Get("/form", func(w rest.ResponseWriter, r *rest.Request) {
-			w.WriteJson([]*contact.Form{
-				&contact.Form{
-					Sender: contact.Sender{
-						Firstname: "Pondd",
-						Lastname:  "NoobMe",
-					},
-					Content: "Contentt",
-				},
-			})
+			w.WriteJson(forms)
+		}),
+		rest.Get("/form/:id", func(w rest.ResponseWriter, r *rest.Request) {
+			id, _ := strconv.Atoi(r.PathParam("id"))
+			w.WriteJson(forms[id])
+		}),
+		rest.Post("/form", func(w rest.ResponseWriter, r *rest.Request) {
+			var form contact.Form
+			r.DecodeJsonPayload(&form)
+			forms = append(forms, &form)
 		}),
 	)
 	api.SetApp(router)
