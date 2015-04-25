@@ -8,16 +8,19 @@
  export GOPATH=/Users/Pondd/Workspace/goworkshop
  export PATH=$GOROOT/bin:$PATH
  ```
- ```
-  vi .zshrc
-export GOROOT=/Users/Pondd/Workspace/go
-export GOPATH=/Users/Pondd/Workspace/goworkshop
-export PATH=$GOROOT/bin:$PATH
-```
 - source .bash_profile
 - open Atom - download package “go plus”
 - Install atom package autocomplete plus
 
+=====================================================================
+# Add dotFile
+- go to zshrc.symlink
+```
+› e ~/.dotfiles  
+export GOROOT=/Users/Pondd/Workspace/go
+export GOPATH=/Users/Pondd/Workspace/goworkshop
+export PATH=$GOROOT/bin:$PATH
+```
 =====================================================================
 
 # Why Go?
