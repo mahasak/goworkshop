@@ -12,7 +12,7 @@
 - open Atom - download package “go plus”
 - Install atom package autocomplete plus
 
-=====================================================================
+
 # Add dotFile
 - go to zshrc.symlink
 ```
@@ -21,7 +21,6 @@ export GOROOT=/Users/Pondd/Workspace/go
 export GOPATH=/Users/Pondd/Workspace/goworkshop
 export PATH=$GOROOT/bin:$PATH
 ```
-=====================================================================
 
 # Why Go?
 - Java8 grow too complex -> most dev use only ver1.2
