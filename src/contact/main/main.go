@@ -1,7 +1,11 @@
 package main
 
-import "contact"
+import (
+	"contact"
+	"fmt"
+)
 
 func main() {
-	contact.Say("hi")
+	msg := contact.Say()
+	fmt.Println(msg)
 }
